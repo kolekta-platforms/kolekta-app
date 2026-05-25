@@ -4,8 +4,9 @@ import MarketingHero from "@/sections/marketing/hero/MarketingHero";
 
 const Page = () => {
   return (
-    <div className="overflow-hidden relative max-container min-h-[calc(100vh-56px)]">
-      {/* Art — top right */}
+    <div className="overflow-hidden relative w-full min-h-[calc(100vh-56px)]">
+      <div className="max-container">
+        {/* Art — top right */}
       <div className="absolute -top-4 right-0 pointer-events-none z-0">
         <Image
           src="/Kolekta-art-1.png"
@@ -66,6 +67,7 @@ const Page = () => {
       <section className="relative z-20 padding">
         <MarketingHero />
       </section>
+      </div>
     </div>
   );
 };

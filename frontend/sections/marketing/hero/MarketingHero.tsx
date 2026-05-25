@@ -69,7 +69,7 @@ export default function MarketingHero() {
         {/* Image container — smaller, controlled height */}
         <div
           className="relative w-full overflow-hidden rounded-2xl"
-          style={{ height: "420px", maxWidth: "360px" }}
+          style={{ height: "500px", maxWidth: "360px" }}
         >
           <Image
             src={carouselImages[current].src}
@@ -77,7 +77,7 @@ export default function MarketingHero() {
             fill
             className="object-cover transition-opacity duration-400"
             style={{ opacity: fading ? 0 : 1, transition: "opacity 0.4s ease" }}
-            sizes="(max-width: 1024px) 45vw, 360px"
+            sizes="(max-width: 1024px) 45vw, 3600px"
             priority
           />
         </div>
