@@ -1,26 +1,462 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Fira+Code:wght@400;500;600;700&display=swap');
+
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+    font-family: "Grotsek";
+    src: url("./fonts/Grotsek.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   KOLEKTA — DAISYUI THEME
+   Aligned with official brand guidelines
+   ============================================ */
+
+@layer base {
+
+    /* ── Universal Reset ─────────────────────── */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    /* ── Root ────────────────────────────────── */
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        tab-size: 4;
+    }
+
+    /* ── Body ────────────────────────────────── */
+    body {
+        font-family: var(--font-primary);
+        background-color: var(--color-kolekta-pale);
+        color: var(--color-kolekta-charcoal);
+        -webkit-font-smoothing: antialiased;   /* Chrome, Safari */
+        -moz-osx-font-smoothing: grayscale;    /* Firefox on Mac */
+        text-rendering: optimizeLegibility;
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    /* ── Media ───────────────────────────────── */
+    img, video, svg, canvas {
+        display: block;
+        max-width: 100%;
+    }
+
+    /* ── Typography ──────────────────────────── */
+    p, h1, h2, h3, h4, h5, h6 {
+        overflow-wrap: break-word;
+    }
+
+    /* ── Lists ───────────────────────────────── */
+    ul, ol {
+        list-style: none;
+    }
+
+    /* ── Buttons & Inputs ────────────────────── */
+    button, input, select, textarea {
+        font: inherit;        /* Browsers don't inherit font on form elements */
+        color: inherit;
+    }
+
+    button {
+        cursor: pointer;
+        background: none;
+    }
+
+    /* ── Links ───────────────────────────────── */
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* ── Tables ──────────────────────────────── */
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    [data-theme="kolekta"] {
+
+        /* Primary — Soft Green (brand primary) */
+        --color-primary:            #20A160;
+        --color-primary-content:    #F0F0E0;
+
+        /* Secondary — Dark Green (logo + accents) */
+        --color-secondary:          #003020;
+        --color-secondary-content:  #F0F0E0;
+
+        /* Accent — Turmeric Gold */
+        --color-accent:             #E0A020;
+        --color-accent-content:     #003020;
+
+        /* Neutral — Warm Charcoal */
+        --color-neutral:            #616150;
+        --color-neutral-content:    #F0F0E0;
+
+        /* Backgrounds */
+        --color-base-100:           #F0F0E0;   /* Pale White — primary canvas */
+        --color-base-200:           #E8E8D0;   /* Slightly deeper */
+        --color-base-300:           #DDDDC8;   /* Muted — borders, dividers */
+        --color-base-content:       #003020;   /* Dark green on pale white */
+
+        /* State colors */
+        --color-info:               #2563EB;
+        --color-info-content:       #F0F0E0;
+        --color-success:            #20A160;   /* Brand green */
+        --color-success-content:    #F0F0E0;
+        --color-warning:            #E0A020;   /* Brand gold */
+        --color-warning-content:    #003020;
+        --color-error:              #C0392B;   /* Brick Red */
+        --color-error-content:      #F0F0E0;
+
+        /* Shape */
+        --radius-box:               0.75rem;
+        --radius-btn:               0.25rem;
+        --radius-badge:             9999px;
+
+        /* Animation */
+        --animation-btn:            0.2s;
+        --animation-input:          0.2s;
+
+        /* Border */
+        --border-btn:               2px;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   KOLEKTA — DESIGN TOKENS
+   ============================================ */
+
+@theme {
+
+    /* --- Fonts (Brand Guidelines: Inter + Fira Code only) --- */
+    --font-primary:   "Inter", sans-serif;       /* ALL text — headings, body, UI */
+    --font-code:      "Fira Code", monospace;
+    --font-brand: "Grotsek", "sans-serif";
+    /* Tax figures, KES amounts, data */
+
+    /* --- Official Brand Colors --- */
+    --color-kolekta-green:        #20A160;   /* Soft Green — primary brand */
+    --color-kolekta-green-dark:   #003020;   /* Dark Green — logo, top bar */
+    --color-kolekta-gold:         #E0A020;   /* Turmeric Gold — accent, highlights */
+    --color-kolekta-charcoal:     #616150;   /* Warm Charcoal — body text */
+    --color-kolekta-pale:         #F0F0E0;   /* Pale White — primary canvas */
+    --color-kolekta-brick:        #C0392B;   /* Brick Red — warnings, errors */
+
+    /* Derived tints — computed from brand colors */
+    --color-kolekta-green-soft:   #D4EDDF;   /* Light green — success bg */
+    --color-kolekta-gold-soft:    #FDF3D6;   /* Light gold — highlight bg */
+    --color-kolekta-pale-deep:    #E8E8D0;   /* Slightly deeper canvas */
+    --color-kolekta-pale-muted:   #DDDDC8;   /* Borders, dividers */
+    --color-kolekta-charcoal-soft:#8A8A72;   /* Muted text, placeholders */
+
+    /* --- Type Scale --- */
+    --text-2xs:   0.625rem;    /* 10px */
+    --text-xs:    0.75rem;     /* 12px */
+    --text-sm:    0.875rem;    /* 14px */
+    --text-base:  1rem;        /* 16px */
+    --text-md:    1.125rem;    /* 18px */
+    --text-lg:    1.25rem;     /* 20px */
+    --text-xl:    1.5rem;      /* 24px */
+    --text-2xl:   2rem;        /* 32px */
+    --text-3xl:   2.75rem;     /* 44px */
+    --text-4xl:   3.75rem;     /* 60px */
+
+    /* --- Border Radius --- */
+    --radius-sm:    4px;
+    --radius-md:    8px;
+    --radius-lg:    12px;
+    --radius-xl:    16px;
+    --radius-2xl:   24px;
+
+    /* --- Shadows (warm, green-tinted) --- */
+    --shadow-sm:  0 1px 3px rgba(0,48,32,0.06), 0 1px 2px rgba(0,48,32,0.04);
+    --shadow-md:  0 4px 12px rgba(0,48,32,0.08), 0 2px 6px rgba(0,48,32,0.05);
+    --shadow-lg:  0 8px 24px rgba(0,48,32,0.10), 0 4px 10px rgba(0,48,32,0.06);
+    --shadow-xl:  0 16px 48px rgba(0,48,32,0.12), 0 8px 20px rgba(0,48,32,0.07);
+
+    /* --- Transitions --- */
+    --transition-fast:    150ms ease;
+    --transition-base:    250ms ease;
+    --transition-slow:    400ms ease;
+
+    /* --- Z-Index Scale --- */
+    --z-below:    -1;
+    --z-base:      0;
+    --z-raised:   10;
+    --z-dropdown: 100;
+    --z-sticky:   200;
+    --z-overlay:  300;
+    --z-modal:    400;
+    --z-toast:    500;
+
+    /* --- Container Max Widths --- */
+    --container-sm:     640px;
+    --container-md:     768px;
+    --container-lg:     1024px;
+    --container-xl:     1200px;
+    --container-2xl:    1400px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: var(--font-primary);
+        background-color: var(--color-kolekta-pale);
+        color: var(--color-kolekta-charcoal);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Headings — Inter, all weights */
+    h1 {
+        font-family: var(--font-primary);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: var(--color-kolekta-green-dark);
+        /* Fluid type — scales between mobile and desktop */
+        font-size: clamp(2rem, 5vw, 3.75rem);
+    }
+
+    h2 {
+        font-family: var(--font-primary);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: var(--color-kolekta-green-dark);
+        font-size: clamp(1.5rem, 3.5vw, 2.75rem);
+    }
+
+    h3 {
+        font-family: var(--font-primary);
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        color: var(--color-kolekta-green-dark);
+        font-size: clamp(1.25rem, 2.5vw, 2rem);
+    }
+
+    h4 {
+        font-family: var(--font-primary);
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--color-kolekta-green-dark);
+        font-size: clamp(1.125rem, 2vw, 1.5rem);
+    }
+
+    h5, h6 {
+        font-family: var(--font-primary);
+        font-weight: 600;
+        color: var(--color-kolekta-green-dark);
+    }
+
+    p {
+        font-family: var(--font-primary);
+        font-weight: 400;
+        line-height: 1.7;
+        color: var(--color-kolekta-charcoal);
+    }
+
+    a {
+        color: var(--color-kolekta-green);
+        text-underline-offset: 3px;
+        transition: color var(--transition-fast);
+    }
+
+    a:hover {
+        color: var(--color-kolekta-green-dark);
+    }
+
+    strong, b {
+        font-weight: 700;
+        color: var(--color-kolekta-green-dark);
+    }
+
+    small {
+        font-size: var(--text-sm);
+        color: var(--color-kolekta-charcoal-soft);
+    }
+}
+
+/* ============================================
+   COMPONENT OVERRIDES
+   ============================================ */
+
+@layer components {
+
+    /* ── Logo ─────────────────────────────────── */
+    .font-logo {
+        font-family: var(--font-primary);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--color-kolekta-green-dark);
+    }
+
+    /* ── Tax figures — Fira Code ──────────────── */
+    .figures,
+    .tax-number,
+    .amount,
+    .kes-amount,
+    .pin-number {
+        font-family: var(--font-code);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--color-kolekta-green-dark);
+    }
+
+    /* ── Gold highlight — key numbers ────────── */
+    .highlight-gold {
+        color: var(--color-kolekta-gold);
+        font-family: var(--font-code);
+        font-weight: 700;
+    }
+
+    /* ── Section label ────────────────────────── */
+    .label-tag {
+        font-family: var(--font-primary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-kolekta-charcoal-soft);
+    }
+
+    /* ── DaisyUI button overrides ─────────────── */
+    .btn {
+        font-family: var(--font-primary);
+        font-size: 0.8125rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: all var(--transition-base);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(32, 161, 96, 0.35);
+    }
+
+    /* ── DaisyUI input overrides ──────────────── */
+    .input,
+    .textarea,
+    .select {
+        font-family: var(--font-primary);
+        background-color: var(--color-kolekta-pale);
+        border-color: var(--color-kolekta-pale-muted);
+    }
+
+    .input:focus,
+    .textarea:focus,
+    .select:focus {
+        border-color: var(--color-kolekta-green);
+        box-shadow: 0 0 0 3px rgba(32, 161, 96, 0.15);
+        outline: none;
+    }
+
+    /* ── DaisyUI card overrides ───────────────── */
+    .card {
+        background-color: var(--color-kolekta-pale-deep);
+        border: 1px solid var(--color-kolekta-pale-muted);
+    }
+
+    /* ── Max container ────────────────────────── */
+    .max-container {
+        width: 100%;
+        max-width: var(--container-2xl);
+        margin-inline: auto;
+    }
+}
+
+/* ============================================
+   RESPONSIVE SPACING UTILITIES
+
+   Strategy:
+   - Mobile first (no prefix) → base styles
+   - sm (640px)   → large phones
+   - md (768px)   → tablets
+   - lg (1024px)  → laptops
+   - xl (1280px)  → large screens
+   - 2xl (1536px) → cap and center content
+
+   Padding scale:
+   - Mobile:   px-5  py-10   (20px / 40px)
+   - sm:       px-8  py-12   (32px / 48px)
+   - md:       px-10 py-16   (40px / 64px)
+   - lg:       px-16 py-20   (64px / 80px)
+   - xl:       px-20 py-24   (80px / 96px)
+   ============================================ */
+
+@utility padding {
+    @apply px-5 py-10 sm:px-8 sm:py-12 md:px-10 md:py-16 lg:px-16 lg:py-20 xl:px-20 xl:py-24;
+}
+
+@utility padding-x {
+    @apply px-5 sm:px-8 md:px-10 lg:px-16 xl:px-20;
+}
+
+@utility padding-y {
+    @apply py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24;
+}
+
+@utility padding-l {
+    @apply pl-5 sm:pl-8 md:pl-10 lg:pl-16 xl:pl-20;
+}
+
+@utility padding-r {
+    @apply pr-5 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-20;
+}
+
+@utility padding-t {
+    @apply pt-10 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24;
+}
+
+@utility padding-b {
+    @apply pb-10 sm:pb-12 md:pb-16 lg:pb-20 xl:pb-24;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+@layer utilities {
+
+    /* Scrollbar */
+    ::-webkit-scrollbar         { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track   { background: var(--color-kolekta-pale); }
+    ::-webkit-scrollbar-thumb   { background: var(--color-kolekta-pale-muted); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-kolekta-charcoal-soft); }
+
+    /* Selection */
+    ::selection {
+        background-color: var(--color-kolekta-gold-soft);
+        color: var(--color-kolekta-green-dark);
+    }
+
+    /* Focus visible */
+    :focus-visible {
+        outline: 2px solid var(--color-kolekta-green);
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
 }
