@@ -1,7 +1,7 @@
 // components/estimator/BandBreakdown.tsx
 
 import { BandResult } from "@/lib/tax-utils";
-import { formatKES, formatRatePercent } from "@/lib/tax-utils";
+import { formatKES, formatPercent } from "@/lib/tax-utils";
 
 interface BandBreakdownProps {
   bands: BandResult[];
@@ -45,7 +45,7 @@ export default function BandBreakdown({
                   flexShrink: 0,
                 }}
               >
-                {formatRatePercent(band.rate)}
+                {formatPercent(band.rate)}
               </span>
               <span
                 style={{
