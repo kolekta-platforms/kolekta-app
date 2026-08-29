@@ -128,7 +128,7 @@ export default function LiveResultPanel({
               <span style={{ color: "#F0F0E0" }}>
                 File your returns to claim this back from KRA.
               </span>{" "}
-              We'll help you do that when we launch.
+              We&apos;ll help you do that when we launch.
             </p>
           ) : isZero ? (
             <p
@@ -368,7 +368,6 @@ export default function LiveResultPanel({
         bands={result.bandBreakdown}
         personalRelief={result.personalRelief}
         whtCredit={result.whtCredit}
-        grossTax={result.grossTax}
         netTax={result.netTax}
       />
 
@@ -508,13 +507,11 @@ function BandBreakdownPanel({
   bands,
   personalRelief,
   whtCredit,
-  grossTax,
   netTax,
 }: {
   bands: BandResult[];
   personalRelief: number;
   whtCredit: number;
-  grossTax: number;
   netTax: number;
 }) {
   const [open, setOpen] = useState(false);
