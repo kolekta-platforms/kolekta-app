@@ -106,7 +106,7 @@ export default function BlogPage() {
               lineHeight: 1.7,
             }}
           >
-            Plain English guides on Kenya's tax system — written for
+            Plain English guides on Kenya&apos;s tax system — written for
             freelancers, creatives, and independent workers.
           </p>
         </div>
@@ -350,7 +350,7 @@ export default function BlogPage() {
                 fontSize: "0.8125rem",
               }}
             >
-              We are publishing guides on every aspect of Kenya's tax system for
+              We are publishing guides on every aspect of Kenya&apos;s tax system for
               independent workers.
             </p>
           </div>
