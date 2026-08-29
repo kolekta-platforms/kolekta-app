@@ -12,7 +12,7 @@
     "start": "sanity start",
     "schema:validate": "sanity schemas validate",
     "schema:extract": "sanity schemas extract",
-    "typegen": "sanity schemas extract --force && sanity typegen generate"
+    "typegen": "sanity schemas extract && sanity typegen generate"
   },
   "keywords": [
     "sanity"
