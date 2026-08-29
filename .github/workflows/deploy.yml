@@ -28,6 +28,9 @@ jobs:
       - name: Build project
         run: npm run build
         working-directory: frontend
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
 
       - name: Deploy to Vercel (production)
         working-directory: frontend
@@ -37,4 +40,6 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           npm install -g vercel@latest
-          vercel deploy --prod --yes
+          vercel deploy --prod --yes \
+            --build-env NEXT_PUBLIC_SANITY_PROJECT_ID=${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }} \
+            --build-env NEXT_PUBLIC_SANITY_DATASET=${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
