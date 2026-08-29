@@ -1,6 +1,7 @@
 // components/estimator/LiveResultPanel.tsx
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import {
   TaxResult,
@@ -482,7 +483,7 @@ function InstallmentSchedulePanel({
             </div>
           ))}
           <div className="px-4 pb-3 pt-2">
-            <a
+            <Link
               href="/blog/installment-tax"
               style={{
                 fontFamily: "var(--font-primary)",
@@ -493,7 +494,7 @@ function InstallmentSchedulePanel({
               }}
             >
               Learn about installment tax →
-            </a>
+            </Link>
           </div>
         </div>
       )}

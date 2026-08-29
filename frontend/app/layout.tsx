@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/common/NavbarMinimal";
 import Footer from "@/components/common/FooterMinimal";
+import { SanityLive } from "@/lib/sanity/live";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1 relative z-10 pb-36 md:pb-14">{children}</main>
         <Footer />
+        <SanityLive />
       </body>
     </html>
   );
