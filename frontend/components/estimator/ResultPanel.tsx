@@ -484,7 +484,7 @@ function InstallmentSchedulePanel({
           ))}
           <div className="px-4 pb-3 pt-2">
             <Link
-              href="/blog/installment-tax"
+              href="/blog"
               style={{
                 fontFamily: "var(--font-primary)",
                 fontSize: "0.8125rem",
