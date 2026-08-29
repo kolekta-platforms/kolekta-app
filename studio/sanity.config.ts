@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'kolekta',
 
-  projectId: 'pg78qsiy',
+  projectId: 'ev7risxe',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],

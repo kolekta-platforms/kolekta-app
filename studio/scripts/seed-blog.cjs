@@ -11,14 +11,16 @@ const {createClient} = require('@sanity/client')
 const fs = require('fs')
 const path = require('path')
 
-const token = process.env.SANITY_AUTH_TOKEN
+const token = process.env.SANITY_WRITE_TOKEN || process.env.SANITY_AUTH_TOKEN
 if (!token) {
-  console.error('Missing SANITY_AUTH_TOKEN. Source .env.local first.')
+  console.error('Missing SANITY_WRITE_TOKEN / SANITY_AUTH_TOKEN. Source .env.local first.')
   process.exit(1)
 }
 
+const projectId = process.env.SANITY_PROJECT_ID || 'ev7risxe'
+
 const client = createClient({
-  projectId: 'pg78qsiy',
+  projectId,
   dataset: 'production',
   apiVersion: '2026-08-29',
   token,

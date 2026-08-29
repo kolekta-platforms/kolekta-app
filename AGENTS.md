@@ -9,18 +9,21 @@ Tax compliance web application for Kenya's independent workers and creatives.
 - `docs/` — Internal documentation
 
 ## Sanity CMS
-- **Project:** kolekta — id `pg78qsiy` (org `ow02tlfnv`)
+- **Project:** kolekta — id `ev7risxe` (org `oyg5pzd3p`), owned by `lyricsngori@gmail.com`
 - **Dataset:** `production`
 - **Studio:** standalone at repo root `studio/`. Keep it standalone — do NOT embed into the app.
-- **Auth:** use a robot API token for CLI/API work. It is stored locally in the repo-root
-  `.env.local` (gitignored) as `SANITY_AUTH_TOKEN`. The CLI picks it up automatically as
-  the `kolekta-cli` robot user — run CLI/`sanity` commands from the repo root (or any dir)
-  with the env var exported (`set -a && source .env.local && set +a`).
-  - The OAuth account (`lyricsngori@gmail.com` / "Pro Grammar") has **no** project access;
-    do not rely on `sanity login` OAuth for this project.
-- **Old project `u0bts60c`** (pre-existing `studio/` config) is NOT accessible with the
-  robot token — treat its schema/config as stale; its blog-post topic ideas were carried
-  over into the new Sanity-backed posts.
+- **CLI:** `sanity` installed globally (`/home/pro-g/.npm-global/bin/sanity`). Source the repo-root
+  `.env.local` (`set -a && source .env.local && set +a`) before CLI commands.
+- **Tokens (in gitignored `.env.local`):**
+  - `SANITY_AUTH_TOKEN` — `kolekta-deploy` robot token, `deploy-studio` role (schema/studio deploys, CORS)
+  - `SANITY_WRITE_TOKEN` — `kolekta-cli` robot token, `write` role (content seeding/creation)
+  - Seed/publish scripts use `SANITY_WRITE_TOKEN` (falls back to `SANITY_AUTH_TOKEN`).
+- **MCP:** Sanity MCP server registered in `~/.config/opencode/opencode.jsonc` as `sanity`
+  (remote `https://mcp.sanity.io`). Auth is a static `Authorization: Bearer {env:SANITY_AUTH_TOKEN}`
+  header resolved from the shell env — the write token is exported in `~/.bashrc`. `oauth: false`
+  disables browser OAuth. Verified: initialize + tools/list succeed with the token.
+- The old project `pg78qsiy` (org `ow02tlfnv`) was the original setup under a different account and
+  is no longer used. `u0bts60c` is an even older stale project with no robot access.
 
 ## Frontend (Next.js)
 - Next.js 16.x App Router; `@/*` path alias → repo root of `frontend/` (no `src/` dir).
