@@ -56,7 +56,7 @@ export default function RootLayout({
         style={{ margin: 0, padding: 0 }}
       >
         <Navbar />
-        <main className="flex-1 relative z-10 pb-14">{children}</main>
+        <main className="flex-1 relative z-10 pb-36 md:pb-14">{children}</main>
         <Footer />
       </body>
     </html>
