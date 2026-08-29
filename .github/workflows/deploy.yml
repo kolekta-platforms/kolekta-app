@@ -1,13 +1,20 @@
 # .github/workflows/deploy.yml
+#
+# Production deploys are handled by Vercel's Git Integration: Vercel watches
+# this repo and auto-deploys the `frontend/` build whenever `main` changes.
+# No Vercel token is required here.
+#
+# This workflow is a gate: it verifies the production build succeeds so a
+# broken build never reaches Vercel. If it passes, Vercel picks up the push.
 
-name: Deploy Website
+name: Deploy (Production Build Verification)
 
 on:
   push:
-    branches: [main]          # Runs when code is merged to main
+    branches: [main]
 
 jobs:
-  deploy:
+  verify-production-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,21 +32,9 @@ jobs:
         run: npm install
         working-directory: frontend
 
-      - name: Build project
+      - name: Build production bundle
         run: npm run build
         working-directory: frontend
         env:
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
-
-      - name: Deploy to Vercel (production)
-        working-directory: frontend
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: |
-          npm install -g vercel@latest
-          vercel deploy --prod --yes \
-            --build-env NEXT_PUBLIC_SANITY_PROJECT_ID=${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }} \
-            --build-env NEXT_PUBLIC_SANITY_DATASET=${{ vars.NEXT_PUBLIC_SANITY_DATASET }}

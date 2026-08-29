@@ -7,9 +7,39 @@ on:
     branches: [main]
 
 jobs:
-  frontend-checks:
+  sanity-checks:
+    name: Sanity schema & typegen
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: studio/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: studio
+
+      - name: Validate schema
+        run: npm run schema:validate
+        working-directory: studio
+
+      - name: Generate query types
+        run: npm run typegen
+        working-directory: studio
+
+      - name: Typecheck studio
+        run: npx tsc --noEmit
+        working-directory: studio
+
+  frontend-checks:
+    name: Frontend lint & build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,11 +55,15 @@ jobs:
         run: npm install
         working-directory: frontend
 
-      - name: Check for code formatting
+      - name: Lint
         run: npm run lint
         working-directory: frontend
 
-      - name: Build the project
+      - name: Typecheck
+        run: npx tsc --noEmit
+        working-directory: frontend
+
+      - name: Build
         run: npm run build
         working-directory: frontend
         env:
