@@ -31,8 +31,12 @@ export default async function BlogPage() {
     query: CATEGORIES_QUERY,
   })) as { data: { _id: string; title: string }[] };
 
+  // Hero shows the most recently published featured post. Any other featured
+  // posts still appear in the grid below — don't filter them all out.
   const featured = posts.find((p: PostSummary) => p.featured);
-  const rest = posts.filter((p: PostSummary) => !p.featured);
+  const rest = posts.filter(
+    (p: PostSummary) => p._id !== featured?._id
+  );
 
   return (
     <div className="relative">
