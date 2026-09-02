@@ -11,6 +11,14 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// Regenerate pages periodically so new/edited posts published in Sanity
+// appear without a manual redeploy. The Sanity webhook busts the cache
+// sooner via /api/revalidate; this is the self-healing safety net.
+export const revalidate = 60;
+
+// New slugs (published after build) must be generated on request, not 404.
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const { data } = (await sanityFetch({
     query: POST_SLUGS_QUERY,

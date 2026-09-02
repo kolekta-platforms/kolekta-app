@@ -16,8 +16,8 @@ export default function FooterMinimal() {
     <footer
       className="fixed bottom-0 left-0 right-0 z-[150] w-full"
       style={{
-        backgroundColor: "transparent",
-        // borderTop: "1px solid #DDD0B8",
+        backgroundColor: "#F0F0E0",
+        borderTop: "1px solid #DDDDC8",
       }}
     >
       <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">

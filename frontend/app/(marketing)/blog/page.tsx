@@ -11,6 +11,10 @@ export const metadata: Metadata = {
     "Tax guides, KRA updates, and practical advice for Kenya's independent workers and creatives.",
 };
 
+// ISR: refresh the listing so newly published posts appear without a
+// redeploy. The Sanity webhook also revalidates on publish via /api/revalidate.
+export const revalidate = 60;
+
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-KE", {
     year: "numeric",
