@@ -6,6 +6,7 @@ import { sanityFetch } from "@/lib/sanity/live";
 import { POST_QUERY, POST_SLUGS_QUERY } from "@/lib/sanity/queries";
 import type { Post } from "@/lib/sanity/types";
 import { SanityImage } from "@/components/common/SanityImage";
+import Comments from "@/components/blog/Comments";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -213,6 +214,8 @@ export default async function PostPage({ params }: Props) {
             </Link>
           </div>
         </div>
+
+        <Comments postId={post._id} />
       </article>
     </div>
   );

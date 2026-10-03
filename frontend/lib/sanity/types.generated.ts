@@ -52,6 +52,27 @@ export type BlockContent = Array<
     }
 >;
 
+export type PostReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "post";
+};
+
+export type Comment = {
+  _id: string;
+  _type: "comment";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  email?: string;
+  comment?: string;
+  post?: PostReference;
+  approved?: boolean;
+  createdAt?: string;
+};
+
 export type CategoryReference = {
   _ref: string;
   _type: "reference";
@@ -243,6 +264,8 @@ export type Geopoint = {
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | BlockContent
+  | PostReference
+  | Comment
   | CategoryReference
   | AuthorReference
   | Post
@@ -357,6 +380,16 @@ export type CATEGORIES_QUERY_RESULT = Array<{
   slug: string | null;
 }>;
 
+// Source: ../frontend/lib/sanity/queries.ts
+// Variable: COMMENTS_QUERY
+// Query: *[_type == "comment" && post._ref == $postId && approved == true] | order(createdAt asc){    _id,    name,    comment,    createdAt  }
+export type COMMENTS_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  comment: string | null;
+  createdAt: string | null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -365,5 +398,6 @@ declare module "@sanity/client" {
     '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    body,\n    publishedAt,\n    featured,\n    readTime,\n    coverImage {\n      asset->{ _id, url, metadata { lqip, dimensions } },\n      alt,\n      hotspot,\n      crop\n    },\n    category->{ _id, title, "slug": slug.current },\n    author->{ _id, name, bio, image { asset->{ url } } }\n  }\n': POST_QUERY_RESULT;
     '\n  *[_type == "post" && defined(slug.current)][].slug.current\n': POST_SLUGS_QUERY_RESULT;
     '\n  *[_type == "category"] | order(title asc){\n    _id,\n    title,\n    "slug": slug.current\n  }\n': CATEGORIES_QUERY_RESULT;
+    '\n  *[_type == "comment" && post._ref == $postId && approved == true] | order(createdAt asc){\n    _id,\n    name,\n    comment,\n    createdAt\n  }\n': COMMENTS_QUERY_RESULT;
   }
 }

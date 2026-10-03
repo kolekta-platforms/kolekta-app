@@ -52,3 +52,12 @@ export const CATEGORIES_QUERY = defineQuery(`
     "slug": slug.current
   }
 `);
+
+export const COMMENTS_QUERY = defineQuery(`
+  *[_type == "comment" && post._ref == $postId && approved == true] | order(createdAt asc){
+    _id,
+    name,
+    comment,
+    createdAt
+  }
+`);
