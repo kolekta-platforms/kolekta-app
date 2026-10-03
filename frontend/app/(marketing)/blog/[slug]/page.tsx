@@ -216,7 +216,9 @@ export default async function PostPage({ params }: Props) {
           </div>
         </div>
 
-        <SurveyCard />
+        <div className="max-w-[760px] pb-12">
+          <SurveyCard />
+        </div>
 
         <Comments postId={post._id} />
       </article>

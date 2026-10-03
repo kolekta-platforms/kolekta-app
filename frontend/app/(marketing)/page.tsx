@@ -1,9 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import MarketingHero from "@/sections/marketing/hero/MarketingHero";
+import SurveyCard from "@/components/common/SurveyCard";
 
 const Page = () => {
   return (
+    <>
     <div className="overflow-hidden relative w-full min-h-[calc(100vh-56px)]">
       <div className="max-container">
         {/* Art — top right */}
@@ -69,6 +71,16 @@ const Page = () => {
       </section>
       </div>
     </div>
+
+      {/* Survey CTA — below the hero, centered across breakpoints */}
+      <div className="max-container">
+        <section className="relative z-10 padding-x pb-12 sm:pb-16 md:pb-20">
+          <div className="mx-auto max-w-3xl">
+            <SurveyCard />
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 
