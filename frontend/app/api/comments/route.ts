@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
 
   // Honeypot: bots fill the hidden field; silently accept.
   if (website) {
-    return NextResponse.json({ ok: true, approved: false }, { status: 201 });
+    return NextResponse.json({ ok: true, approved: true }, { status: 201 });
   }
 
   if (!name || name.length > MAX_NAME) {
@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
       email: email || undefined,
       comment,
       post: { _type: "reference", _ref: postId },
-      approved: false,
+      approved: true,
       createdAt: new Date().toISOString(),
     });
   } catch (err) {
@@ -102,5 +102,5 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  return NextResponse.json({ ok: true, approved: false }, { status: 201 });
+  return NextResponse.json({ ok: true, approved: true }, { status: 201 });
 }

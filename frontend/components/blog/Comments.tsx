@@ -8,10 +8,13 @@ type Props = {
 };
 
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-KE", {
+  return new Date(iso).toLocaleString("en-KE", {
     year: "numeric",
     month: "short",
     day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "Africa/Nairobi",
   });
 }
 

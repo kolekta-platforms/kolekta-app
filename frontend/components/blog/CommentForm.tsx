@@ -77,7 +77,7 @@ export default function CommentForm({ postId }: CommentFormProps) {
             lineHeight: 1.6,
           }}
         >
-          It is awaiting moderation and will appear here once approved.
+          It has been posted below.
         </p>
       </div>
     );

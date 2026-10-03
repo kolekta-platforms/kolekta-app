@@ -38,8 +38,8 @@ export const comment = defineType({
       name: 'approved',
       title: 'Approved',
       type: 'boolean',
-      description: 'Only approved comments are shown on the site.',
-      initialValue: false,
+      description: 'Comments are approved by default. Uncheck to hide from the site.',
+      initialValue: true,
     }),
     defineField({
       name: 'createdAt',
@@ -49,7 +49,7 @@ export const comment = defineType({
     }),
   ],
   initialValue: {
-    approved: false,
+    approved: true,
   },
   orderings: [
     {
