@@ -10,14 +10,21 @@ type SubmitState = "idle" | "loading" | "success" | "error";
 
 export default function CommentForm({ postId }: CommentFormProps) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [website, setWebsite] = useState("");
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+
   const handleSubmit = async () => {
     if (!name.trim()) {
       setErrorMessage("Please enter your name.");
+      return;
+    }
+    if (email.trim() && !isValidEmail(email.trim())) {
+      setErrorMessage("Please enter a valid email address.");
       return;
     }
     if (!comment.trim()) {
@@ -32,7 +39,7 @@ export default function CommentForm({ postId }: CommentFormProps) {
       const res = await fetch("/api/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, comment, postId, website }),
+        body: JSON.stringify({ name, email, comment, postId, website }),
       });
 
       const data = await res.json();
@@ -77,7 +84,7 @@ export default function CommentForm({ postId }: CommentFormProps) {
             lineHeight: 1.6,
           }}
         >
-          It has been posted below.
+          Your comment will be added shortly.
         </p>
       </div>
     );
@@ -133,6 +140,26 @@ export default function CommentForm({ postId }: CommentFormProps) {
           outline: "none",
         }}
         aria-label="Your name"
+      />
+
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          setErrorMessage(null);
+        }}
+        placeholder="Email (optional — we'll only use it to reply to you)"
+        className="w-full rounded-lg px-4 py-3 mb-3"
+        style={{
+          fontFamily: "var(--font-primary)",
+          fontSize: "0.9375rem",
+          color: "#003020",
+          backgroundColor: "#F0F0E0",
+          border: errorMessage ? "1.5px solid #C0392B" : "1.5px solid #DDDDC8",
+          outline: "none",
+        }}
+        aria-label="Email"
       />
 
       <textarea
